@@ -1,0 +1,51 @@
+﻿@{
+	ViewData["Title"] = "Home Page";
+}
+
+@section Styles
+{
+	<link rel="stylesheet" href="~/scss/demo.css">
+}
+
+<div class="text-center">
+	<h1 class="display-4">Welcome</h1>
+	<p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+	<button>Click</button>
+</div>
+
+@Html.ActionLink("Test Page", "Test", "Home", null, new { style = "background-color:red"})
+<br />
+<a asp-action="Test" asp-controller="Home" style="background-color:red">Test Page</a>
+
+@*<table border="1">
+	<thead>
+	<th>
+		@foreach (var j in (Model as List<Dictionary<string, object>>)[0])
+		{
+
+		<td>@j.Key</td>
+
+		}
+	</th>
+	</thead>
+	<tbody>
+		@foreach (var i in Model as List<Dictionary<string, object>>)
+		{
+			<tr style="border:1px solid black">
+				@foreach (var j in i)
+				{
+
+					<td style="border:1px solid black">@j.Value</td>
+
+				}
+			</tr>
+		}
+	</tbody>
+</table>*@
+@section Scripts
+	{
+	<script>
+		alert("hello");
+	</script>
+
+}

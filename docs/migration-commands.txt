@@ -1,0 +1,13 @@
+dotnet ef migrations add Initial --context EsportshubApi.Models.ApplicationDbContext -o YourFolderPath -> create migration
+
+dotnet ef database update -> update database
+dotnet ef migrations remove -> remove last migration
+dotnet ef database update LastGoodMigration -> revert to a migration
+dotnet ef migrations script --output "script.sql"-> generate sql
+
+# For updating migration tool to latest version
+dotnet tool update --global dotnet-ef
+
+# Install specific version of dotnet ef tool
+dotnet tool install --global dotnet-ef --version 3.1.0
+

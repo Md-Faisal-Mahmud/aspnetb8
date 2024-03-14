@@ -1,0 +1,76 @@
+version: "3"
+services:
+    web:
+        build: 
+            context: FirstDemo/
+            dockerfile: FirstDemo.Web/Dockerfile
+        image: devskill/firstdemo.web
+        env_file: 
+            - FirstDemo/Env/web.env
+        volumes:
+            - ./Logs/Web:/app/Logs/
+        ports:
+            - "8000:80"
+        networks:
+            customnetwork:
+                ipv4_address: 172.20.0.10
+        depends_on:
+            - db
+        entrypoint: ["./wait-for-it.sh", "db:1433", "-t", "120", "--", "dotnet", "FirstDemo.Web.dll"]
+    worker:
+        build: 
+            context: FirstDemo/
+            dockerfile: FirstDemo.Worker/Dockerfile
+        image: devskill/firstdemo.worker
+        env_file: 
+            - FirstDemo/Env/worker.env
+        depends_on: 
+            - db 
+            - web
+        networks:
+            customnetwork:
+                ipv4_address: 172.20.0.7
+        volumes:
+            - ./Logs/Worker:/app/Logs/
+        entrypoint:  ["./wait-for-it.sh", "db:1433", "-t", "5000", "--","dotnet", "FirstDemo.Worker.dll"]
+    api:
+        build:
+            context: FirstDemo/
+            dockerfile: FirstDemo.Api/Dockerfile 
+        image: devskill/firstdemo.api
+        env_file: 
+            - FirstDemo/Env/api.env
+        ports:
+            - "9000:80"
+        networks:
+            customnetwork:
+                ipv4_address: 172.20.0.9
+        depends_on: 
+            - db
+            - web
+        volumes: 
+            - ./Logs/Api:/app/Logs/
+        entrypoint:  ["./wait-for-it.sh", "db:1433", "-t", "5000", "--","dotnet", "FirstDemo.API.dll"]
+    
+    db:
+        build: 
+            context: FirstDemo/Db
+            dockerfile: Dockerfile
+        image: "devskill/firstdemo.sqlserver"
+        env_file: 
+            - FirstDemo/Env/db.env
+        expose:
+            - "1432"
+        ports: 
+            - "1432:1433"
+        networks:
+            customnetwork:
+                ipv4_address: 172.20.0.8
+volumes:
+    app-volume:
+networks:
+  customnetwork:
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+     

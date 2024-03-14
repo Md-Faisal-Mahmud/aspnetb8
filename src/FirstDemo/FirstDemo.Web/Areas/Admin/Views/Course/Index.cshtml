@@ -1,0 +1,101 @@
+﻿@model CourseListModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+@section Styles
+{
+    <link rel="stylesheet" href="/adminlte3/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
+}
+
+<section class="content">
+    <div class="row">
+    <div class="col-12">
+        <!-- /.card -->
+        <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">DataTable with default features</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+            <partial name="_ResponsePartial" />
+            <table id="courses" class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Fees</th>
+                <th style="width:150px">Actions</th>
+            </tr>
+            </thead>
+            <tbody></tbody>
+            <tfoot>
+            <tr>
+                <th>Name</th>
+                <th>Fees</th>
+                <th style="width:150px">Actions</th>
+            </tr>
+            </tfoot>
+            </table>
+            <partial name="_ModalPartial" />
+        </div>
+        <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+    <!-- /.col -->
+    </div>
+    <!-- /.row -->
+</section>
+  
+@section Scripts
+{
+    <!-- DataTables -->
+    <script src="~/adminlte3/plugins/datatables/jquery.dataTables.js"></script>
+    <script src="~/adminlte3/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+
+    <!-- page script -->
+    <script>
+        $(function () {
+            $('#courses').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "ajax": {
+                    "url": "/Admin/Course/GetCourses",
+                },
+                "columnDefs": [
+                    {
+                        "orderable": false,
+                        "targets": 2,
+                        "render": function (data, type, row) {
+                            return `<button type="submit" class="btn btn-info btn-sm" onclick="window.location.href='/admin/course/update/${data}'" value='${data}'>
+                                                <i class="fas fa-pencil-alt">
+                                                </i>
+                                                Edit
+                                            </button>
+                                            <button type="submit" class="btn btn-danger btn-sm show-bs-modal" data-id='${data}' value='${data}'>
+                                                <i class="fas fa-trash">
+                                                </i>
+                                                Delete
+                                            </button>`;
+                        }
+                    }
+                ]
+            });
+
+            $('#courses').on('click', '.show-bs-modal', function (event) {
+                var id = $(this).data("id");
+                var modal = $("#modal-default");
+                modal.find('.modal-body p').text('Are you sure you want to delete this record?');
+                $("#deleteId").val(id);
+                $("#deleteForm").attr("action", "/admin/course/delete");
+                modal.modal('show');
+            });
+
+            $("#deleteButton").click(function () {
+                $("#deleteForm").submit();
+            });
+        });
+    </script>
+}
+
+

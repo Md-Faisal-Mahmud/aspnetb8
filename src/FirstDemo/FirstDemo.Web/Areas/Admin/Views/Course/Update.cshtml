@@ -1,0 +1,51 @@
+﻿@model CourseUpdateModel
+@{
+    ViewData["Title"] = "Update Course";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- left column -->
+        <div class="col-md-6">
+            <!-- general form elements -->
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Update Course</h3>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                <form role="form" asp-antiforgery="true" asp-action="Update"
+                      asp-area="Admin" asp-controller="Course" method="post">
+                    <input type="hidden" asp-for="Id" />
+                    <div class="card-body">
+                        <partial name="_ResponsePartial" />
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="Name"></label>
+                            <input type="text" class="form-control" asp-for="Name" placeholder="Enter title">
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Fees"></label>
+                            <input type="text" class="form-control" asp-for="Fees" placeholder="Enter fees">
+                            <span asp-validation-for="Fees" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+            <!-- /.card -->
+
+        </div>
+        <!--/.col (left) -->
+    </div>
+    <!-- /.row -->
+</div><!-- /.container-fluid -->
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,17 @@
+Worker service installation
+1) Add nuget package: Microsoft.Extensions.Hosting.WindowsServices
+
+2) Add .UseWindowsService() in Program.cs 
+CreateHostBuilder method
+
+3) Publish the project in folder
+
+4) Run command
+sc.exe create OurService binpath= C:\folder\path\exectutablefilename.ext start= auto
+
+5) Start the service
+
+Worker Service uninstallation
+1) Stop the service
+2) Run command
+sc.exe delete OurService 

@@ -1,0 +1,13 @@
+﻿@mixin someStyle($divColor, $buttonColor, $hoverColor) {
+    div {
+        background-color: $divColor;
+
+        button {
+            background-color: $buttonColor;
+
+            &:hover {
+                background-color: $hoverColor;
+            }
+        }
+    }
+}

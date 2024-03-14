@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+        "noImplicitAny": false,
+        "noEmitOnError": true,
+        "removeComments": false,
+        "sourceMap": true,
+        "outDir": "wwwroot/js",
+        "target": "es5"
+    }
+}

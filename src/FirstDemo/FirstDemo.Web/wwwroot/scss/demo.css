@@ -1,0 +1,9 @@
+﻿div {
+  background-color: yellow;
+}
+div button {
+  background-color: purple;
+}
+div button:hover {
+  background-color: green;
+}

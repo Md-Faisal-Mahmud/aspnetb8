@@ -1,0 +1,12 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<html>
+	<head></head>
+	<body>
+		<h3 style="color:red">Hello, <#=Name#> </h3>
+		<a href="<#=Link#>">Click the link to verify email</a>
+	</body>
+</html>

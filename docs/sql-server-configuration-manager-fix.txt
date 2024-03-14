@@ -1,0 +1,6 @@
+Find in C:\Windows\SysWOW64\SQLServerManager<number>.msc 
+
+if still it doesn't run, then apply following command:
+mofcomp "%programfiles(x86)%\Microsoft SQL Server\<number>\Shared\sqlmgmproviderxpsp2up.mof"
+
+(<number> should be updated based on sql server version)

@@ -1,0 +1,50 @@
+﻿@model RoleAssignModel
+@{
+    ViewData["Title"] = "Assign Role";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- left column -->
+        <div class="col-md-6">
+            <!-- general form elements -->
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Assign Role</h3>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                <form role="form" asp-antiforgery="true" asp-action="AssignRole"
+                      asp-area="Admin" asp-controller="Settings" method="post">
+                    <div class="card-body">
+                        <partial name="_ResponsePartial" />
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="Username"></label>
+                            <select asp-items="@Model.Users" asp-for="Username"></select>
+                            <span asp-validation-for="Username" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="RoleName"></label>
+                            <select asp-items="@Model.Roles" asp-for="RoleName"></select>
+                            <span asp-validation-for="RoleName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+            <!-- /.card -->
+
+        </div>
+        <!--/.col (left) -->
+    </div>
+    <!-- /.row -->
+</div><!-- /.container-fluid -->
+@section Scripts
+    {
+    <partial name="_ValidationScriptsPartial" />
+}
